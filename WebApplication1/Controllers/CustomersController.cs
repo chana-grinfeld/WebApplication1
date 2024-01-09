@@ -25,90 +25,90 @@ namespace WebApplication1.Controllers
             return Ok(customers);
         }
 
-        //[HttpGet("{id}")]
-        //public ActionResult<Customer> GetCustomer(int id)
-        //{
-        //    var customer = _dbContext.Customers.FirstOrDefault(c => c.Id == id);
+        [HttpGet("{id}")]
+        public ActionResult<Customer> GetCustomer(int id)
+        {
+            var customer = _dbContext.Customers.FirstOrDefault(c => c.Id == id);
 
-        //    if (customer == null)
-        //    {
-        //        return NotFound();
-        //    }
+            if (customer == null)
+            {
+                return NotFound();
+            }
 
-        //    return Ok(customer);
-        //}
+            return Ok(customer);
+        }
 
-        //[HttpPost]
-        //public ActionResult<Customer> AddCustomer(Customer customer)
-        //{
-        //    customer.Created = DateTime.UtcNow;
-        //    customer.CustomerNumber = Guid.NewGuid();
+        [HttpPost]
+        public ActionResult<Customer> AddCustomer(Customer customer)
+        {
+            customer.Created = DateTime.UtcNow;
+            customer.CustomerNumber = Guid.NewGuid();
 
-        //    bool isNameExists = _dbContext.Customers.Any(c => c.NameFull == customer.NameFull);
-        //    if (isNameExists)
-        //    {
-        //        return BadRequest("שם הלקוח כבר קיים במערכת.");
-        //    }
+            bool isNameExists = _dbContext.Customers.Any(c => c.NameFull == customer.NameFull);
+            if (isNameExists)
+            {
+                return BadRequest("שם הלקוח כבר קיים במערכת.");
+            }
 
-        //    _dbContext.Customers.Add(customer);
-        //    _dbContext.SaveChanges();
+            _dbContext.Customers.Add(customer);
+            _dbContext.SaveChanges();
 
-        //    return Ok(customer);
-        //}
+            return Ok(customer);
+        }
 
-        //[HttpPut("{id}")]
-        //public ActionResult<Customer> UpdateCustomer(int id, Customer updatedCustomer)
-        //{
-        //    var existingCustomer = _dbContext.Customers.FirstOrDefault(c => c.Id == id);
+        [HttpPut("{id}")]
+        public ActionResult<Customer> UpdateCustomer(int id, Customer updatedCustomer)
+        {
+            var existingCustomer = _dbContext.Customers.FirstOrDefault(c => c.Id == id);
 
-        //    if (existingCustomer == null)
-        //    {
-        //        return NotFound();
-        //    }
+            if (existingCustomer == null)
+            {
+                return NotFound();
+            }
 
-        //    existingCustomer.NameFull = updatedCustomer.NameFull;
+            existingCustomer.NameFull = updatedCustomer.NameFull;
 
-        //    _dbContext.SaveChanges();
+            _dbContext.SaveChanges();
 
-        //    return Ok(existingCustomer);
-        //}
+            return Ok(existingCustomer);
+        }
 
-        //[HttpDelete("{id}")]
-        //public ActionResult DeleteCustomer(int id)
-        //{
-        //    var customer = _dbContext.Customers.FirstOrDefault(c => c.Id == id);
+        [HttpDelete("{id}")]
+        public ActionResult DeleteCustomer(int id)
+        {
+            var customer = _dbContext.Customers.FirstOrDefault(c => c.Id == id);
 
-        //    if (customer == null)
-        //    {
-        //        return NotFound();
-        //    }
+            if (customer == null)
+            {
+                return NotFound();
+            }
 
-        //    customer.IsDeleted = true;
+            customer.IsDeleted = true;
 
-        //    _dbContext.SaveChanges();
+            _dbContext.SaveChanges();
 
-        //    return NoContent();
-        //}
+            return NoContent();
+        }
 
-        //[HttpPost]
-        //[Route("customers/{customerId}/contacts")]
-        //public ActionResult<Customer> AddContactToCustomer(int customerId, Contact contact)
-        //{
-        //    var customer = _dbContext.Customers.FirstOrDefault(c => c.Id == customerId);
+        [HttpPost]
+        [Route("customers/{customerId}/contacts")]
+        public ActionResult<Customer> AddContactToCustomer(int customerId, Contact contact)
+        {
+            var customer = _dbContext.Customers.FirstOrDefault(c => c.Id == customerId);
 
-        //    if (customer == null)
-        //    {
-        //        return NotFound();
-        //    }
+            if (customer == null)
+            {
+                return NotFound();
+            }
 
-        //    contact.CustomerId = customerId;
+            contact.CustomerId = customerId;
 
-        //    customer.Contacts.Add(contact);
+            customer.Contacts.Add(contact);
 
-        //    _dbContext.SaveChanges();
+            _dbContext.SaveChanges();
 
-        //    return Ok(customer);
-        //}
+            return Ok(customer);
+        }
 
     }
 }
